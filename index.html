@@ -1,11 +1,303 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Title</h1>
-</body>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Article</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <a href="#" class="firstLink">Home</a>
+      <a href="#">Link name</a>
+      <a href="#">about</a>
+      <label class="switch">
+        <input type="checkbox" id="themeToggle" /><span class="slider"></span>
+      </label>
+    </header>
+    <p>
+      <i>(refresh the page to see a randomly generated (fake) article (using no
+        AI))</i>
+    </p>
+    <h1 id="title"></h1>
+    <div id="body"></div>
+
+    <script>
+      const firstSentences = [
+        "Recent developments in the field have sparked widespread interest.",
+        "Experts are increasingly concerned about the implications of this trend.",
+        "Over the past decade, significant changes have reshaped the industry.",
+        "This phenomenon has drawn attention from multiple sectors of society.",
+        "Researchers continue to explore the potential benefits and challenges.",
+        "Understanding the underlying factors is essential for informed decisions.",
+        "The latest studies have revealed surprising insights.",
+        "A closer look at recent data provides a clearer picture of the issue.",
+        "New approaches are emerging that promise to improve outcomes.",
+        "Historical trends offer valuable lessons for current practices.",
+        "Many stakeholders have expressed interest in this growing topic.",
+        "Innovations in technology have accelerated the pace of progress.",
+        "Societal shifts have contributed to a reevaluation of established methods.",
+        "The debate surrounding this subject has intensified in recent years.",
+        "Several initiatives aim to address the complexities of the problem.",
+        "Practical applications of recent findings are becoming increasingly common.",
+        "Analyses of case studies reveal patterns worth noting.",
+        "Policy changes have influenced the direction of recent developments.",
+        "Collaboration between experts has produced significant breakthroughs.",
+        "Ongoing research continues to refine our understanding of the topic.",
+      ];
+
+      const additionalSentences = [
+        "Research indicates that the effects are multifaceted and interconnected.",
+        "Technological advancements play a key role in shaping outcomes.",
+        "Some findings contradict earlier assumptions in the field.",
+        "Stakeholders must adapt strategies to align with new evidence.",
+        "Interdisciplinary approaches often yield deeper insights.",
+        "Organizations are implementing innovative practices in response.",
+        "Public engagement significantly influences how developments unfold.",
+        "Ethical considerations remain central to ongoing debates.",
+        "Unexpected outcomes open new avenues for investigation.",
+        "Historical context is essential for understanding current trends.",
+        "Examining multiple case studies helps identify meaningful patterns.",
+        "Integrating theory and practice ensures applications are effective and reliable.",
+        "Long-term planning must consider potential future implications.",
+        "Collaboration among professionals fosters creative solutions.",
+        "Ongoing monitoring allows for adjustments as circumstances change.",
+        "Emerging trends prompt reconsideration of conventional methodologies.",
+        "Decision-makers must balance risk and reward when adopting new strategies.",
+        "Continuous learning is critical in a rapidly evolving landscape.",
+        "Cross-sector partnerships have proven valuable for solving complex problems.",
+        "Adapting to unforeseen changes is an essential organizational skill.",
+        "Pilot programs provide useful information before wider implementation.",
+        "Data quality and transparency are important for credible conclusions.",
+        "Local experiences often inform broader policy discussions.",
+        "Careful evaluation helps determine which approaches are most effective.",
+        "Transparency in methodology strengthens public trust.",
+        "Comparative analysis reveals variation across different contexts.",
+        "Scalable solutions are especially valuable in resource-limited settings.",
+        "Stakeholder input improves the relevance of proposed interventions.",
+        "Regular assessment enables course correction when needed.",
+        "Clear communication enhances public understanding and support.",
+        "Training and capacity building increase the likelihood of success.",
+        "Funding mechanisms influence which projects move forward.",
+        "Evidence-based approaches tend to produce more reliable outcomes.",
+        "Methodological rigor contributes to reproducible results.",
+        "Community engagement ensures solutions align with local needs.",
+        "Technology adoption often depends on user-friendly design.",
+        "Regulatory environments shape how innovations are deployed.",
+        "Longitudinal studies provide insight into cumulative effects.",
+        "Interviews with practitioners offer valuable practical perspectives.",
+        "Pilot evaluations can uncover important implementation barriers.",
+        "Data-driven decision-making increases accountability.",
+        "Peer review remains a cornerstone of scholarly validation.",
+        "Cross-cultural comparisons highlight differing priorities and constraints.",
+        "Incremental improvements frequently lead to substantial long-term gains.",
+        "Behavioral factors sometimes explain outcomes better than technical fixes.",
+        "Resource allocation decisions reflect competing interests and values.",
+        "Scenarios and modeling provide a way to examine future possibilities.",
+        "Feedback loops are important for adaptive management.",
+        "Transparent reporting helps build consensus among diverse groups.",
+        "Evidence synthesis combines findings from multiple studies into coherent guidance.",
+      ];
+
+      const transitions = [
+        "Moreover,",
+        "Additionally,",
+        "Interestingly,",
+        "Consequently,",
+        "Furthermore,",
+        "As a result,",
+        "In contrast,",
+        "On the other hand,",
+        "Notably,",
+        "For example,",
+        "In particular,",
+        "At the same time,",
+        "Beyond that,",
+        "With this in mind,",
+        "In practice,",
+        "In many cases,",
+        "On closer examination,",
+        "From another perspective,",
+      ];
+
+      const topics = [
+        "Technology",
+        "Health",
+        "Education",
+        "Environment",
+        "Economy",
+        "Culture",
+        "Science",
+        "Innovation",
+        "Agriculture",
+        "Energy",
+        "Politics",
+        "Transport",
+        "Sociology",
+        "Art",
+        "History",
+        "Philosophy",
+        "Media",
+        "Sports",
+        "Tourism",
+        "Business",
+        "Mathematics",
+        "Psychology",
+        "Law",
+        "Geography",
+      ];
+      const adjectives = [
+        "Modern",
+        "Critical",
+        "Innovative",
+        "Recent",
+        "Emerging",
+        "Complex",
+        "Transformative",
+        "Significant",
+        "Groundbreaking",
+        "Contemporary",
+        "Strategic",
+        "Influential",
+        "Dynamic",
+        "Remarkable",
+        "Unique",
+        "Essential",
+        "Important",
+        "Advanced",
+        "Notable",
+        "Unprecedented",
+        "Prominent",
+        "Relevant",
+        "Resilient",
+        "Expansive",
+      ];
+      const verbs = [
+        "shapes",
+        "influences",
+        "challenges",
+        "advances",
+        "transforms",
+        "enhances",
+        "drives",
+        "impacts",
+        "redefines",
+        "questions",
+        "reshapes",
+        "affects",
+        "guides",
+        "initiates",
+        "stimulates",
+        "expands",
+        "evolves",
+        "triggers",
+        "frames",
+        "alters",
+        "informs",
+        "supports",
+        "redirects",
+        "establishes",
+      ];
+      const nouns = [
+        "society",
+        "industry",
+        "research",
+        "development",
+        "policy",
+        "perspectives",
+        "trends",
+        "practices",
+        "systems",
+        "communities",
+        "markets",
+        "knowledge",
+        "institutions",
+        "processes",
+        "norms",
+        "outcomes",
+        "approaches",
+        "decisions",
+        "environments",
+        "methods",
+        "structures",
+        "priorities",
+        "expectations",
+        "resources",
+      ];
+
+      function generateTitle() {
+        const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+        const topic = topics[Math.floor(Math.random() * topics.length)];
+        const verb = verbs[Math.floor(Math.random() * verbs.length)];
+        const noun = nouns[Math.floor(Math.random() * nouns.length)];
+        return `${adj} ${topic}: How It ${verb} ${noun}`;
+      }
+      function generateArticle(wordTarget = Math.floor(Math.random() * 10000)) {
+        const title = generateTitle();
+        document.getElementById("title").innerText = title;
+
+        const bodyDiv = document.getElementById("body");
+
+        let wordCount = 0;
+        const minParagraphSentences = 5;
+        const maxParagraphSentences = 20;
+
+        while (wordCount < wordTarget) {
+          let paragraph =
+            firstSentences[Math.floor(Math.random() * firstSentences.length)] +
+            " ";
+          let paragraphSentences =
+            Math.floor(
+              Math.random() *
+                (maxParagraphSentences - minParagraphSentences + 1),
+            ) +
+            minParagraphSentences -
+            1;
+
+          for (let i = 0; i < paragraphSentences; i++) {
+            const transition =
+              transitions[Math.floor(Math.random() * transitions.length)];
+            const sentence =
+              additionalSentences[
+                Math.floor(Math.random() * additionalSentences.length)
+              ];
+            paragraph += " " + transition + " " + sentence;
+          }
+
+          const p = document.createElement("p");
+          p.innerText = paragraph.trim();
+          bodyDiv.appendChild(p);
+
+          wordCount += paragraph.split(" ").length;
+        }
+      }
+
+      generateArticle();
+    </script>
+    <div id="cookie-banner">
+      <p>
+        We use cookies to enhance your experience. <br /><button
+          id="accept-cookies">
+          Accept All
+        </button>
+        <button id="open-settings">Manage Settings</button>
+      </p>
+    </div>
+    <div id="cookie-modal">
+      <form id="cookie-form">
+        <label><input type="checkbox" name="qualityOfLife" checked /> Quality of
+          life</label>
+        <label><input type="checkbox" name="fun" checked /> Fun</label>
+        <label><input type="checkbox" name="marketing" checked />
+          Marketing/Advertising</label>
+        <labelff><input type="checkbox" name="analytical" checked />
+          Analytical</label>
+        <label><input type="checkbox" name="functional" checked disabled />
+          Functional (always on)</label>
+        <button type="submit" id="save-preferences">Save Preferences</button>
+        <button type="button" id="accept-all">Accept All</button>
+      </form>
+    </div>
+  </body>
 </html>
